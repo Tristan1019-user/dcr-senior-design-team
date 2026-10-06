@@ -1,0 +1,26 @@
+{
+  "version": "1.0",
+  "components": [
+    {"id": "i2c_bus_0", "type": "i2c_bus", "priority": 7, "config": {"port": 0, "sda_pin": 8, "scl_pin": 9, "freq_hz": 100000}},
+    {"id": "i2c_bus_1", "type": "i2c_bus", "priority": 7, "config": {"port": 1, "sda_pin": 10, "scl_pin": 11, "freq_hz": 100000}},
+    {"id": "sht45", "type": "sht45_sensor", "config": {"address": 68, "period_ms": 1000}},
+    {"id": "bmp280", "type": "bmp280_sensor", "config": {"address": 118, "period_ms": 1000}},
+    {"id": "sht_temperature_c", "type": "logger"},
+    {"id": "humidity_pct", "type": "logger"},
+    {"id": "bmp_temperature_c", "type": "logger"},
+    {"id": "pressure_pa", "type": "logger"}
+  ],
+  "connections": [
+    {"from": "sht45.bus", "to": "i2c_bus_0.request"},
+    {"from": "bmp280.bus", "to": "i2c_bus_1.request"},
+    {"from": "sht45.temperature_c", "to": "sht_temperature_c.input"},
+    {"from": "sht45.humidity_pct", "to": "humidity_pct.input"},
+    {"from": "bmp280.temperature_c", "to": "bmp_temperature_c.input"},
+    {"from": "bmp280.pressure_pa", "to": "pressure_pa.input"}
+  ],
+  "safety_rules": [
+    {"id": "preserve_sht_bus", "type": "connection_locked", "from": "sht45.bus", "to": "i2c_bus_0.request"},
+    {"id": "preserve_bmp_bus", "type": "connection_locked", "from": "bmp280.bus", "to": "i2c_bus_1.request"}
+  ],
+  "settings": {"watchdog_timeout_ms": 5000, "signal_wait_timeout_ms": 100, "log_level": "info"}
+}

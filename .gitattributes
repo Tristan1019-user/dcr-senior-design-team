@@ -1,0 +1,3 @@
+# Preserve source-hashed experiment records and sponsor artifacts byte-for-byte.
+# Do not normalize historical files as part of repository packaging.
+* -text

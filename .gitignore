@@ -1,0 +1,22 @@
+build*/
+.tools/
+sdkconfig
+sdkconfig.old
+managed_components/
+dependencies.lock
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+*.egg-info/
+.ruff_cache/
+.env
+.env.*
+!.env.example
+host/recordings/
+output/
+# Device logs can contain private addresses, identifiers, and local paths.
+docs/evidence/*
+!docs/evidence/README.md
+.DS_Store
+Thumbs.db

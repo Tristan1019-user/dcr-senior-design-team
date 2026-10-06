@@ -1,0 +1,21 @@
+[project]
+name = "dcr-host"
+version = "0.1.0"
+description = "Validated, model-independent DCR control-plane harness"
+requires-python = ">=3.12"
+dependencies = ["pyserial>=3.5,<4", "pydantic>=2.10,<3", "httpx>=0.28,<1", "rich>=13,<15"]
+
+[project.scripts]
+dcr-host = "dcr_host.cli:main"
+dcr-platform = "dcr_host.platform:main"
+
+[dependency-groups]
+dev = ["pytest>=8,<10", "pytest-asyncio>=0.24,<2"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]

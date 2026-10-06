@@ -1,0 +1,17 @@
+{
+  "version": "1.0",
+  "components": [
+    {"id": "counter", "type": "counter_source", "config": {"value": 1, "step": 1, "period_ms": 50}},
+    {"id": "scale", "type": "float_scale", "config": {"gain": 2}},
+    {"id": "scaled", "type": "logger"},
+    {"id": "raw_queue", "type": "logger"},
+    {"id": "raw_signal", "type": "signal_logger"}
+  ],
+  "connections": [
+    {"from": "counter.output", "to": "scale.input", "signal": "count"},
+    {"from": "counter.output", "to": "raw_queue.input", "signal": "count"},
+    {"from": "counter.output", "to": "raw_signal.input"},
+    {"from": "scale.output", "to": "scaled.input"}
+  ],
+  "settings": {"watchdog_timeout_ms": 5000, "signal_wait_timeout_ms": 100, "log_level": "info"}
+}
